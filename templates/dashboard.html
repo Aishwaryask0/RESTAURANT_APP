@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="hero">
+    <h1>Welcome back, <span>{{ name }}!</span></h1>
+    <p>What would you like to do today?</p>
+</div>
+
+<div class="dash-cards">
+    <a href="/food" class="dash-card">
+        <div>🍽️</div>
+        <p>View Menu</p>
+    </a>
+    <a href="/categories" class="dash-card">
+        <div>📋</div>
+        <p>Categories</p>
+    </a>
+    <a href="/orders" class="dash-card">
+        <div>📦</div>
+        <p>My Orders</p>
+    </a>
+    <a href="/logout" class="dash-card logout">
+        <div>🚪</div>
+        <p>Logout</p>
+    </a>
+    <a href="/book_table" class="dash-card">
+        <div>📅</div>
+        <p>Book Table</p>
+    </a>
+    {% if session.get('is_admin') %}
+    <a href="/users" class="dash-card">
+        <div>👥</div>
+        <p> All Users</p>
+    </a>
+    <a href="/admin" class="dash-card">
+        <div>🔑</div>
+        <p>Admin Panel</p>
+    </a>
+    <a href="/manage" class="dash-card">
+    <div>⚙️</div>
+    <p>Manage Menu</p>
+</a>
+    {% endif %}
+</div>
+
+<style>
+.hero {
+    text-align: center;
+    padding: 60px 20px 40px;
+}
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: #f5f5f5;
+}
+.hero h1 span { color: #c9a84c; }
+.hero p {
+    color: #888;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+.dash-cards {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 40px 20px 80px;
+    flex-wrap: wrap;
+}
+.dash-card {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    width: 180px;
+    transition: border-color 0.3s, transform 0.2s;
+}
+.dash-card:hover {
+    border-color: #c9a84c;
+    transform: translateY(-5px);
+}
+.dash-card div {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+.dash-card p {
+    color: #c9a84c;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    margin: 0;
+}
+.logout:hover {
+    border-color: #ff4444;
+}
+.logout p {
+    color: #ff4444 !important;
+}
+</style>
+{% endblock %}

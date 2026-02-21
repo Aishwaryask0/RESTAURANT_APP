@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">All Users</h1>
+    <p class="page-subtitle">Registered members</p>
+    <div class="divider"></div>
+</div>
+<div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in users %}
+            <tr>
+                <td>{{ item[0] }}</td>
+                <td>{{ item[1] }}</td>
+                <td>{{ item[2] }}</td>
+                <td>{{ item[3] }}</td>
+                <td>{{ item[4] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<style>
+.table-wrapper { 
+    max-width: 1000px; 
+    margin: 0 auto 80px; 
+    padding: 0 30px; 
+}
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+}
+thead tr { 
+    border-bottom: 2px solid #c9a84c; 
+}
+thead th { 
+    padding: 15px 20px; 
+    color: #c9a84c; 
+    font-size: 0.8rem; 
+    letter-spacing: 2px; 
+    text-transform: uppercase; 
+    text-align: left; 
+}
+tbody tr { 
+    border-bottom: 1px solid #222; 
+    transition: background 0.2s; }
+tbody tr:hover { 
+    background: #1a1a1a; 
+}
+tbody td { 
+    padding: 18px 20px; 
+    color: #ccc; 
+    font-size: 0.95rem; 
+    }
+</style>
+{% endblock %}

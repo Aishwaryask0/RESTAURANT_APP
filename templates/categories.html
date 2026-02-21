@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">Our Categories</h1>
+    <p class="page-subtitle">Explore our cuisine</p>
+    <div class="divider"></div>
+</div>
+
+<div class="mycards-container">
+    {% for category in categories %}
+    <div class="mycard">
+        <div class="mycard-inner">
+            <div class="mycard-front">
+                <div class="mycard-emoji">
+                    {% if category[1] == 'North Indian' %}🍛
+                    {% elif category[1] == 'South Indian' %}🥘
+                    {% elif category[1] == 'Chinese' %}🍜
+                    {% elif category[1] == 'Snacks' %}🍟
+                    {% else %}🍽️
+                    {% endif %}
+                </div>
+                <h3>{{ category[1] }}</h3>
+                <p class="hover-hint">hover to explore</p>
+            </div>
+            <div class="mycard-back">
+                <div class="mycard-emoji">
+                    {% if category[1] == 'North Indian' %}🍛
+                    {% elif category[1] == 'South Indian' %}🥘
+                    {% elif category[1] == 'Chinese' %}🍜
+                    {% elif category[1] == 'Snacks' %}🍟
+                    {% else %}🍽️
+                    {% endif %}
+                </div>
+                <h3>{{ category[1] }}</h3>
+                <p>{{ category[2] }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<style>
+.mycards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px 60px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.mycard {
+    width: 200px;
+    height: 260px;
+    perspective: 1000px;
+    cursor: pointer;
+    border: none !important;
+    box-shadow: none !important;
+}
+.mycard-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.7s ease;
+}
+.mycard:hover .mycard-inner {
+    transform: rotateY(180deg);
+}
+.mycard-front, .mycard-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    text-align: center;
+}
+.mycard-front {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 20px;
+    outline: none;
+}
+.mycard-front:hover {
+    border-color: #c9a84c;
+}
+.mycard-back {
+    background: linear-gradient(135deg, #c9a84c, #a07830);
+    transform: rotateY(180deg);
+    box-shadow: 0 8px 32px rgba(201,168,76,0.3);
+}
+.mycard-emoji {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+.mycard-front h3 {
+    font-family: 'Playfair Display', serif;
+    color: #c9a84c;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+.hover-hint {
+    color: #444;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+.mycard-back h3 {
+    font-family: 'Playfair Display', serif;
+    color: #111;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+}
+.mycard-back p {
+    color: #2a1a00;
+    font-size: 0.82rem;
+    line-height: 1.6;
+}
+.mycard::before , .mycard::after{
+    display: none !important;
+    content: '' !important;
+    border: none !important;
+    position: static  !important;
+}
+</style>
+{% endblock %}

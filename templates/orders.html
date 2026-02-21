@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="page-header">
+    <div class="page-title">Orders</div>
+    <div class="page-subtitle">place your orders</div>
+    <div class="divider"></div>
+</div>
+<div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Food_Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders%}
+            <tr>
+                <td>#{{ order[0] }}</td>
+                <td>{{ order[1] }}</td>
+                <td> {{ order[2] }}</td>
+                <td> {{ order[3] }}</td>
+                <td>₹{{ order[5] }}</td>
+                <td>₹{{ order[6] }}</td>
+                <td> {{ order[4] }}</td>
+                <td>
+                    <a href="/remove_order/{{ order[0] }}" class="remove-btn">Remove</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+<style>
+    .table-wrapper {
+    max-width: 1000px;
+    margin: 0 auto 80px;
+    padding: 0 30px;
+    }
+    .page-header{
+        padding: 40px 20px 30px;
+    }
+    .page-title{
+        font-size: 3.5rem;
+        letter-spacing: 1px;
+    }
+    .page-subtitle{
+        font-size: 1.1rem !important;
+        margin-top: 1px;
+    }
+    .table-wrapper{
+        max-width: 1000px;
+        margin:  0  auto 80px;
+        padding: 0 30px;
+    }
+    .table{
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .thead tr{
+        border-bottom: 2px solid #c9a84c;
+    }
+    thead th { 
+        padding: 15px 20px; 
+        color: #c9a84c; 
+        font-size: 0.8rem; 
+        letter-spacing: 2px; 
+        text-transform: uppercase; 
+        text-align: left; 
+    }
+    tbody tr { 
+        border-bottom: 1px solid #222;
+        transition: background 0.2s; 
+    }
+    tbody tr:hover { 
+        background: #1a1a1a; 
+    }
+    tbody td { 
+        padding: 18px 20px; 
+        color: #ccc; 
+        font-size: 0.95rem; 
+    }
+    .remove-btn{
+        background-color: #2a0000 ;
+        color: #ff4444;
+        border: 1px solid #ff4444;
+        padding: 6px 14px;
+        border-radius: 10px;
+        font-size: 0.8rem;
+          transition: background 0.2s;
+    }
+    .remove-btn:hover { 
+        background: #ff4444; 
+        color: #fff; 
+    }
+</style>
+{% endblock %}

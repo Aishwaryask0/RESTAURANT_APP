@@ -1,0 +1,149 @@
+{% extends 'base.html'%}
+
+{% block content %}
+{% with message = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category , message in messages%}
+<div class="alert-msg {{ category }}-msg">
+     {% if category == 'error' %}⚠️{% else %}✅{% endif %}
+            {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<div class="page-header">
+    <div class="page-title">Food Menu </div>
+    <div class="page-subtitle">Crafted with passion</div>
+    <div class="divider"></div>
+</div>
+<div class="menu-container">
+    {% for item in food %}
+    <div class="menu-card">
+        <div class="menu-emoji">🍽️</div>
+        <div class="menu-info">
+            <h3>{{ item[2] }}</h3>
+            <p> {{item[4] if item[4] else 'a delicious dish' }}</p>
+        </div>
+        <div class="menu-right">
+            <div class="menu-price">₹ {{ item[3] }}</div>
+            <form action="/place_order" method="POST">
+                <input type="hidden" name="food_id" value="{{ item[0] }}">
+                <input type="number" name="quantity" value="1" min="0" max="10"class="qty-input">
+                <button type="submit" class="order-btn">Order</button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<style>
+    .alert-msg { 
+        text-align: center; 
+        padding: 15px; 
+        border-radius: 10px; 
+        margin: 20px auto; 
+        max-width: 500px; 
+    }
+    .error-msg { 
+        background: #2a0000; 
+        border: 1px solid #ff4444; 
+        color: #ff4444; 
+    }.success-msg { 
+        background: #002a00; 
+        border: 1px solid #44ff44; 
+        color: #44ff44; 
+    }
+    .menu-container{
+        max-width: 800px;
+        margin: 0 auto 80px;
+        padding: 0 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .menu-card{
+        background-color: #1a1a1a;
+        border: 1px solid #2a2a2a;
+        border-radius: 12px;
+        padding: 25px 30px;
+        display:flex;
+        align-items: center;
+        gap: 20px;
+        transition: border-color 0.3s , transform 0.2s;
+    }
+    .menu-card:hover{
+        border-color: #c9a84c;
+    }
+    .menu-emoji{
+        font-size: 2.5rem;
+        min-width: 60px;
+        text-align: center;
+    }
+    .menu-info{
+        flex: 1;
+    }
+    .menu-info h3{
+        font-family: 'Playfair Display', serif;
+        color: #c9a84c;
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+    }
+    .menu-info p {
+        color: #666;
+        font-size: 0.85rem;
+    }
+    .menu-right{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    .menu-price{
+        background: linear-gradient(135deg , #c9a84c , #a07830);
+        color: #111;
+        font-weight: bold;
+        font-size: 1rem;
+        padding: 8px 18px;
+        border-radius: 20px;
+        white-space: nowrap;
+    }
+    .menu-right form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+    .qty-input{
+        width: 60px;
+        text-align: center;
+        background:#2a2a2a;
+        border: 1px solid #444;
+        color: #f5f5f5;
+        border-radius: 8px;
+        padding: 5px;
+    }
+    .order-btn{
+        background: linear-gradient(135deg , #c9a84c , #a07830);
+        color: #111;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+    .order-btn:hover{
+        transform: translateY(-2px);
+    }
+    .page-header{
+        padding: 40px 20px 30px;
+    }
+    .page-title{
+        font-size: 3.5rem !important;
+        letter-spacing: 1px;
+    }
+    .page-subtitle{
+        font-size: 1.1rem !important;
+        margin-top: 10px;
+    }
+</style>
+{% endblock %}

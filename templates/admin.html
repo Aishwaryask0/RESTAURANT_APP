@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="page-header">
+    <h1 class="page-title">Admin Panel</h1>
+    <p class="page-subtitle">System administrators</p>
+    <div class="divider"></div>
+</div>
+
+<!--stats-->
+<div class="stats-container">
+    <div class="stat-card">
+        <div class="stat-icon">👥</div>
+        <div class="stat-number">{{ total_users }}</div>
+        <div class="stat-label">Total Users</div>
+    </div>
+     <div class="stat-card">
+        <div class="stat-icon">📦</div>
+        <div class="stat-number">{{ total_orders }}</div>
+        <div class="stat-label">Total Orders</div>
+    </div>
+     <div class="stat-card">
+        <div class="stat-icon">📅</div>
+        <div class="stat-number">{{ total_bookings }}</div>
+        <div class="stat-label">Total Bookings</div>
+    </div>
+</div>
+<!-- ALL ORDERS -->
+<div class="section-header">
+    <h2 class="page-title" style="font-size:2rem;">All Orders</h2>
+    <div class="divider"></div>
+</div>
+<div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Food Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in all_orders %}
+            <tr>
+                <td>#{{ order[0] }}</td>
+                <td>{{ order[1] }}</td>
+                <td>{{ order[2] }}</td>
+                <td>{{ order[3] }}</td>
+                <td>₹{{ order[4] }}</td>
+                <td>₹{{ order[5] }}</td>
+                <td>{{ order[6] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<!-- ALL BOOKINGS -->
+<div class="section-header">
+    <h2 class="page-title" style="font-size:2rem;">All Table Bookings</h2>
+    <div class="divider"></div>
+</div>
+<div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>Booking ID</th>
+                <th>Customer</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Guests</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in all_bookings %}
+            <tr>
+                <td>#{{ booking[0] }}</td>
+                <td>{{ booking[1] }}</td>
+                <td>{{ booking[2] }}</td>
+                <td>{{ booking[3] }}</td>
+                <td>{{ booking[4] }}</td>
+                <td><span class="status-badge">{{ booking[5] }}</span></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<style>
+.stats-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    padding: 20px 20px 50px;
+}
+.stat-card {
+    background: #111;
+    border: 1px solid #2a2a2a;
+    border-radius: 16px;
+    padding: 30px 50px;
+    text-align: center;
+    transition: border-color 0.3s;
+}
+.stat-card:hover { border-color: #c9a84c; }
+.stat-icon { font-size: 2.5rem; margin-bottom: 10px; }
+.stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: #c9a84c;
+    font-weight: bold;
+}
+.stat-label {
+    color: #888;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 5px;
+}
+.section-header { 
+    text-align: center; 
+    padding: 20px 0; 
+}
+.table-wrapper { 
+    max-width: 1000px; 
+    margin: 0 auto 60px; 
+    padding: 0 30px; 
+}
+table { width: 100%; 
+    border-collapse: collapse; 
+}
+thead tr { 
+    border-bottom: 2px solid #c9a84c; 
+}
+thead th { padding: 15px 20px; 
+    color: #c9a84c; 
+    font-size: 0.8rem; 
+    letter-spacing: 2px; 
+    text-transform: uppercase; 
+    text-align: left; 
+}
+tbody tr { 
+    border-bottom: 1px solid #222; 
+    transition: background 0.2s; }
+tbody tr:hover { 
+    background: #1a1a1a; 
+}
+tbody td { 
+    padding: 18px 20px; 
+    color: #ccc; 
+    font-size: 0.95rem; 
+}
+.status-badge {
+    background: #002a00;
+    color: #44ff44;
+    border: 1px solid #44ff44;
+    padding: 4px 12px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+ {% if messages %}
+   {% for category , message in messages %}
+   <div class="alert-msg {{ category }}-msg">
+     {% if category == ' error' %}⚠️{% else %}✅{% endif %}
+     {{message}}
+   </div>
+   {% endfor %}
+  {% endif %}
+{% endwith %} 
+
+<div class="page-header">
+    <h1 class="page-title">Book a Table</h1>
+    <p class="page-subtitle">Reserve your spot</p>
+    <div class="divider"></div>
+</div>
+
+<!--booking form -->
+<div class="booking-form-container">
+    <form action="/book_table" method="POST" class="booking-form">
+        <div class="form-row">
+            <div class="input-field">
+                <input type="date" name="date" id="date" required style="color: #f5f5f5;">
+                <label for="date" class="active">Date</label>
+            </div>
+            <div class="input-field">
+                <input type="time" name="time" id="time" required style="color: #f5f5f5;">
+                <label for="time" class="active">Time</label>
+            </div>
+            <div class="input-field">
+                <input type="number" name="guests" id="guests" min="1" max="20" value="2" required style="color:#f5f5f5;">
+                <label for="guests" class="active">Number of Guests</label>
+            </div>
+        </div>
+         <button type="submit" class="book-btn">Book Table 🍽️</button>
+    </form>
+</div>
+
+<!--EXISTING BOOKINGS-->
+{% if bookings %}
+<div class="page-header" style="padding-top: 40px;">
+    <h2 class="page-title" style="font-size: 2rem;">Your Bookings</h2>
+    <div class="divider"></div>
+</div>
+<div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>Booking Id</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Guests</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+            <tr>
+                <td>#{{ booking[0] }}</td>
+                <td>{{ booking[1] }}</td>
+                <td>{{ booking[2] }}</td>
+                <td>{{ booking[3] }}</td>
+                <td>{{ booking[4] }}</td>
+                <td><span class="sta-badge">{{ booking[5] }}</span></td>
+                <td><a href="/cancel_booking/{{ booking[0] }}" class="remove-btn">Cancel</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<p style="text-align:center; color:#666; margin-top: 20px;">No bookings yet!</p>
+{% endif %}
+
+<style>
+    .alert-msg { 
+        text-align: center; 
+        padding: 15px; 
+        border-radius: 10px; 
+        margin: 20px auto; 
+        max-width: 500px; 
+    }
+    .error-msg { 
+        background: #2a0000; 
+        border: 1px solid #ff4444; 
+        color: #ff4444; 
+    }
+    .success-msg { 
+        background: #002a00; 
+        border: 1px solid #44ff44; 
+        color: #44ff44; 
+    }
+    .booking-form-container {
+        max-width: 700px;
+        margin: 0 auto 40px;
+        padding: 40px;
+        background: #111;
+        border: 1px solid #2a2a2a;
+        border-radius: 16px;
+    }
+    .form-row {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+    .form-row .input-field {
+        flex: 1;
+        min-width: 150px;
+    }
+    .book-btn {
+        background: linear-gradient(135deg, #c9a84c, #a07830);
+        color: #111;
+        border: none;
+        padding: 12px 40px;
+        border-radius: 25px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: transform 0.2s;
+    }
+    .book-btn:hover { 
+        transform: translateY(-2px); 
+    }
+    .table-wrapper { 
+        max-width: 1000px; 
+        margin: 0 auto 80px; 
+        padding: 0 30px; 
+    }
+    table { 
+        width: 100%; 
+        border-collapse: collapse; 
+    }
+    thead tr { 
+        border-bottom: 2px solid #c9a84c; 
+    }
+    thead th { 
+        padding: 15px 20px; 
+        color: #c9a84c; 
+        font-size: 0.8rem; 
+        letter-spacing: 2px; 
+        text-transform: uppercase; 
+        text-align: left; 
+    }
+    tbody tr { 
+        border-bottom: 1px solid #222; 
+        transition: background 0.2s; 
+    }
+    tbody tr:hover { 
+        background: #1a1a1a; 
+    }tbody td { 
+        padding: 18px 20px; 
+        color: #ccc; 
+        font-size: 0.95rem; 
+    }
+    .status-badge {
+        background: #002a00;
+        color: #44ff44;
+        border: 1px solid #44ff44;
+        padding: 4px 12px;
+        border-radius: 10px;
+        font-size: 0.8rem;
+    }
+    .remove-btn {
+        background: #2a0000;
+        color: #ff4444;
+        border: 1px solid #ff4444;
+        padding: 6px 14px;
+        border-radius: 10px;
+        font-size: 0.8rem;
+        transition: background 0.2s;
+    }
+    .remove-btn:hover { 
+        background: #ff4444; 
+        color: #fff; 
+    }
+</style>
+{% endblock %}

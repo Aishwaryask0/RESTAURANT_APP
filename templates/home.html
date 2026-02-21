@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+ {% if messages %}
+   {% for category , message in messages %}
+   <div class="alert-msg {{ category }}-msg">
+     {% if category == ' error' %}⚠️{% else %}✅{% endif %}
+     {{message}}
+   </div>
+   {% endfor %}
+  {% endif %}
+{% endwith %} 
+<div class="hero">
+    <h1>Welcome to <span>Restaurant App</span></h1>
+    <p>Authentic flavours</p>
+    <a href="/food" class="hero-btn">Explore Menu</a>
+</div>
+
+<!--Login & Register-->
+<div class="auth-container">
+
+    <div class="auth-card">
+        <h4> Login</h4>
+        <form action="/login" method="POST">
+            <div class="input-field">
+                <input type="email" name="email" id="email" style="color: #f5f5f5;">
+                <label for="email">Email</label>
+            </div>
+            <div class="input-field">
+                <input type="password" name="password" id="password" style="color: #f5f5f5;">
+                <label for="password">Password</label>
+            </div>
+            <button type="submit" class="auth-btn">Login</button>
+        </form>
+    </div>
+
+    <div class="auth-card">
+        <h4>Create Account</h4>
+        <form action="/register" method="POST">
+            <div class="input-field">
+                <input type="text" name="name" id="name" style="color: #f5f5f5;">
+                <label for="name">Name</label>
+            </div>
+            <div class="input-field">
+                <input type="email" name="reg_email" id="reg_email" style="color: #f5f5f5;">
+                <label for="reg_email">Email</label>
+            </div>
+            <div class="input-field">
+                <input type="password" name="reg_password" id="reg_password" style="color: #f5f5f5;">
+                <label for="reg_password">Password</label>
+            </div>
+            <button type="submit" class="auth-btn">Register</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    .alert-msg{
+        text-align: center;
+        padding: 15px;
+        border-radius: 10px;
+        margin: 20px auto;
+        max-width: 500px;
+    }
+    .error-msg{
+        background: #2a0000;
+        border: 1px solid #ff4444;
+        color: #ff4444;
+    }
+    .success-msg{
+        background: #002a00;
+        border: 1px solid #44ff44;
+        color: #44ff44;
+    }
+    .hero{
+        text-align: center;
+        padding: 60px 20px 40px;
+    }
+    .hero h1{
+        font-family: 'Playfair Display' , serif;
+        font-size: 3.5rem;
+        color: #f5f5f5;
+        margin-bottom: 15px;
+    }
+    .hero h1 span{color: #c9a84c; }
+    .hero p{
+        color: #888;
+        font-size: 1rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 40px;
+    }
+    .hero-btn{
+        background: linear-gradient(135deg , #c9a84c , #a07830);
+        color: #111 !important;
+        padding: 14px 40px;
+        border-radius: 30px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+    .auth-container{
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        flex-wrap: wrap;
+        padding: 20px 20px 80px;
+    }
+    .auth-card{
+        background: #111;
+        border: 1px solid #2a2a2a;
+        border-radius: 16px;
+        padding: 40px;
+        width: 340px;
+    }
+    .auth-card h4{
+        font-family: 'Playfair Display', serif;
+        color: #c9a84c;
+        margin-bottom: 20px;
+    }
+    .auth-btn{
+        background: linear-gradient(135deg , #c9a84c , #a07830);
+        color: #111;
+        border: none;
+        padding: 12px 0;
+        width: 100%;
+        border-radius: 25px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+    .auth-btn:hover{
+        opacity: 0.9;
+        transform: translateY(-2px);
+    }
+</style>
+{% endblock %}

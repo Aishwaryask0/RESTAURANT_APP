@@ -1,0 +1,207 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert-msg {{ category }}-msg">
+            {% if category == 'error' %}⚠️{% else %}✅{% endif %}
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<div class="page-header">
+    <h1 class="page-title">Manage Restaurant</h1>
+    <p class="page-subtitle">Add or remove items</p>
+    <div class="divider"></div>
+</div>
+
+<!-- ADD CATEGORY -->
+<div class="manage-section">
+    <h2 class="section-title">Categories</h2>
+     <div class="add-form">
+        <form action="/add_category" method="POST">
+            <input type="text" name="name" placeholder="Category Name" required class="manage-input">
+            <input type="text" name="description" placeholder="Description" required class="manage-input">
+            <button type="submit" class="add-btn">+ Add Category</button>
+         </form>
+</div>
+ <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cat in categories %}
+            <tr>
+                <td>{{ cat[0] }}</td>
+                <td>{{ cat[1] }}</td>
+                <td>{{ cat[2] }}</td>
+                <td><a href="/delete_category/{{ cat[0] }}" class="remove-btn">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- ADD FOOD -->
+<div class="manage-section">
+    <h2 class="section-title">Food Menu</h2>
+    <div class="add-form">
+        <form action="/add_food" method="POST">
+            <input type="text" name="name" placeholder="Food Name" required class="manage-input">
+            <input type="number" name="price" placeholder="Price" required class="manage-input">
+            <input type="text" name="description" placeholder="Description" class="manage-input">
+            <select name="cat_id" class="manage-input">
+                {% for cat in categories %}
+                <option value="{{ cat[0] }}">{{ cat[1] }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="add-btn">+ Add Food</button>
+        </form>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for food in foods %}
+            <tr>
+                <td>{{ food[0] }}</td>
+                <td>{{ food[1] }}</td>
+                <td>₹{{ food[2] }}</td>
+                <td>{{ food[3] }}</td>
+                <td>{{ food[4] }}</td>
+                <td><a href="/delete_food/{{ food[0] }}" class="remove-btn">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<style>
+.alert-msg { 
+    text-align: center; 
+    padding: 15px; 
+    border-radius: 10px; 
+    margin: 20px auto; 
+    max-width: 500px; 
+}
+.error-msg { 
+    background: #2a0000; 
+    border: 1px solid #ff4444; 
+    color: #ff4444; 
+}
+.success-msg { 
+    background: #002a00;
+    border: 1px solid #44ff44; 
+    color: #44ff44; 
+}
+.manage-section {
+    max-width: 1000px;
+    margin: 0 auto 60px;
+    padding: 0 30px;
+}
+.section-title {
+    font-family: 'Playfair Display', serif;
+    color: #c9a84c;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+.add-form {
+    background: #111;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+.add-form form {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.manage-input {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #f5f5f5;
+    padding: 10px 15px;
+    border-radius: 8px;
+    flex: 1;
+    min-width: 150px;
+}
+.manage-input:focus { 
+    border-color: #c9a84c; 
+    outline: none; 
+}
+select.manage-input option { 
+    background: #1a1a1a; 
+}
+.add-btn {
+    background: linear-gradient(135deg, #c9a84c, #a07830);
+    color: #111;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+}
+.add-btn:hover { 
+    opacity: 0.9; 
+}
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+}
+thead tr { 
+    border-bottom:
+     2px solid #c9a84c; 
+    }
+thead th { 
+    padding: 15px 20px; 
+    color: #c9a84c; 
+    font-size: 0.8rem; 
+    letter-spacing: 2px; 
+    text-transform: uppercase; 
+    text-align: left; 
+}
+tbody tr { 
+    border-bottom: 1px solid #222; 
+    transition: background 0.2s; 
+}
+tbody tr:hover { 
+    background: #1a1a1a; 
+}
+tbody td { 
+    padding: 18px 20px; 
+    color: #ccc; 
+    font-size: 0.95rem; 
+}
+.remove-btn { 
+    background: #2a0000; 
+    color: #ff4444; 
+    border: 1px solid #ff4444; 
+    padding: 6px 14px; 
+    border-radius: 10px; 
+    font-size: 0.8rem; 
+}
+.remove-btn:hover { 
+    background: #ff4444; 
+    color: #fff; }
+    
+</style>
+{% endblock %}
