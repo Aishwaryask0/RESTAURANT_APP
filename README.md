@@ -1,0 +1,1 @@
+Restaurant Management System built with Flask and MySQL. Includes CRUD operations for managing menu items, orders, and billing. Database schema designed with proper SQL queries and transaction handling
