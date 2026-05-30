@@ -1,4 +1,4 @@
-Restaurant Management System
+### Restaurant Management System
 
 A server-side web application built with Flask and MySQL for managing restaurant operations including menu items, orders, and billing.
 Features
@@ -12,19 +12,29 @@ Responsive HTML interface with inline styling
 Technologies Used
 
 Python 3.x
+
 Flask
+
 MySQL
+
 HTML, CSS
 
 Project Structure
+
 RESTAURANT_APP/
+
 ├── app.py          # Main Flask application
+
 ├── schema.sql      # Database schema
+
 ├── templates/      # HTML templates
+
 └── README.md
+
 How to Run
 
 Clone the repo
+
 Install dependencies: pip install flask mysql-connector-python
 Setup MySQL and run schema.sql to create tables
 Update DB credentials in app.py
