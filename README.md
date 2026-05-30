@@ -11,12 +11,12 @@ Responsive HTML interface with inline styling
 
 Technologies Used
 
-Python 3.x
+Python 3.x  
+Flask   
+MySQL  
+HTML, CSS  
 
-Flask
-MySQL
-HTML, CSS
-Project Structure
+Project Structure  
 
 RESTAURANT_APP/
 
