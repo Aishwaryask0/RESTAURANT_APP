@@ -14,11 +14,8 @@ Technologies Used
 Python 3.x
 
 Flask
-
 MySQL
-
 HTML, CSS
-
 Project Structure
 
 RESTAURANT_APP/
