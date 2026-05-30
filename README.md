@@ -1,4 +1,5 @@
 Restaurant Management System
+
 A server-side web application built with Flask and MySQL for managing restaurant operations including menu items, orders, and billing.
 Features
 
