@@ -64,9 +64,3 @@ python app.py
 * Server-side application development
 * Form handling and validation
 
-## Future Improvements
-
-* User authentication system
-* Online payment integration
-* Admin dashboard
-* REST API integration
