@@ -1,45 +1,72 @@
-### Restaurant Management System
+# Restaurant Management System
 
-A server-side web application built with Flask and MySQL for managing restaurant operations including menu items, orders, and billing.
-Features
+A database-driven restaurant management web application built using Flask and MySQL to manage menu items, customer orders, and billing operations efficiently.
 
-Add, view, update and delete menu items
-Manage customer orders and billing
-Full CRUD operations with validation and error handling
-Structured relational database with optimized SQL queries
-Responsive HTML interface with inline styling
+## Features
 
-Technologies Used
+* Add, update, delete, and manage menu items
+* Manage customer orders and billing details
+* CRUD operations integrated with MySQL database
+* Dynamic data handling using Flask backend
+* Input validation and error handling
+* Responsive user interface using HTML and CSS
 
-Python 3.x  
-Flask   
-MySQL  
-HTML, CSS  
+## Tech Stack
 
-Project Structure  
+* Python
+* Flask
+* MySQL
+* HTML
+* CSS
 
-RESTAURANT_APP/
+## Project Structure
 
-├── app.py          # Main Flask application
+```plaintext
+app.py
+templates/
+static/
+database/
+```
 
-├── schema.sql      # Database schema
+## How to Run the Project
 
-├── templates/      # HTML templates
+1. Clone the repository
 
-└── README.md
+```bash
+git clone <repository-link>
+```
 
-How to Run
+2. Navigate to the project folder
 
-Clone the repo
+```bash
+cd RESTAURANT_APP
+```
 
-Install dependencies: pip install flask mysql-connector-python
-Setup MySQL and run schema.sql to create tables
-Update DB credentials in app.py
-Run: python app.py
-Open http://localhost:5000
+3. Install required dependencies
 
-Database
+```bash
+pip install -r requirements.txt
+```
 
-Designed with proper relational schema
-Optimized SQL queries for data retrieval
-Supports transaction handling for order and billing management
+4. Configure MySQL database connection
+
+5. Run the Flask application
+
+```bash
+python app.py
+```
+
+## Learning Outcomes
+
+* Backend development using Flask
+* Database integration with MySQL
+* CRUD operations implementation
+* Server-side application development
+* Form handling and validation
+
+## Future Improvements
+
+* User authentication system
+* Online payment integration
+* Admin dashboard
+* REST API integration
